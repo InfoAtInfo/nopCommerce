@@ -211,7 +211,7 @@ namespace Nop.Web.Factories
                 OrderStatus = await _localizationService.GetLocalizedEnumAsync(order.OrderStatus),
                 IsReOrderAllowed = _orderSettings.IsReOrderAllowed,
                 IsReturnRequestAllowed = await _orderProcessingService.IsReturnRequestAllowedAsync(order),
-                PdfInvoiceDisabled = _pdfSettings.DisablePdfInvoicesForPendingOrders && order.OrderStatus == OrderStatus.Pending,
+                PdfInvoiceDisabled = _pdfSettings.DisablePdfInvoicesForPendingOrders,
                 CustomOrderNumber = order.CustomOrderNumber,
 
                 //shipping info
