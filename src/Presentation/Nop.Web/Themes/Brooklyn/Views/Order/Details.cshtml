@@ -51,6 +51,7 @@
 
         <div class="order-details-area">
             <ul class="billing-info">
+                <!--
                 <li class="title">
                     @T("Order.BillingAddress")
                 </li>
@@ -90,17 +91,17 @@
                         @Model.BillingAddress.Address2
                     </li>
                 }
-                        @if (Model.BillingAddress.CityEnabled && !string.IsNullOrEmpty(Model.BillingAddress.City)|| 
-                            Model.BillingAddress.CountyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.County) || 
-                            Model.BillingAddress.StateProvinceEnabled && !string.IsNullOrEmpty(Model.BillingAddress.StateProvinceName) || 
+                        @if (Model.BillingAddress.CityEnabled && !string.IsNullOrEmpty(Model.BillingAddress.City)||
+                            Model.BillingAddress.CountyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.County) ||
+                            Model.BillingAddress.StateProvinceEnabled && !string.IsNullOrEmpty(Model.BillingAddress.StateProvinceName) ||
                             Model.BillingAddress.ZipPostalCodeEnabled && !string.IsNullOrEmpty(Model.BillingAddress.ZipPostalCode))
                         {
                             <li class="city-state-zip">
                                 @if (Model.BillingAddress.CityEnabled && !string.IsNullOrEmpty(Model.BillingAddress.City))
                                 {
                                     @Model.BillingAddress.City
-                                    @if (Model.BillingAddress.CountyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.County) || 
-                                        Model.BillingAddress.StateProvinceEnabled && !string.IsNullOrEmpty(Model.BillingAddress.StateProvinceName) || 
+                                    @if (Model.BillingAddress.CountyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.County) ||
+                                        Model.BillingAddress.StateProvinceEnabled && !string.IsNullOrEmpty(Model.BillingAddress.StateProvinceName) ||
                                         Model.BillingAddress.ZipPostalCodeEnabled && !string.IsNullOrEmpty(Model.BillingAddress.ZipPostalCode))
                                     {
                                         <text>,</text>
@@ -109,7 +110,7 @@
                                 @if (Model.BillingAddress.CountyEnabled && !string.IsNullOrEmpty(Model.BillingAddress.County))
                                 {
                                     @Model.BillingAddress.County
-                                    @if (Model.BillingAddress.StateProvinceEnabled && !string.IsNullOrEmpty(Model.BillingAddress.StateProvinceName) || 
+                                    @if (Model.BillingAddress.StateProvinceEnabled && !string.IsNullOrEmpty(Model.BillingAddress.StateProvinceName) ||
                                         Model.BillingAddress.ZipPostalCodeEnabled && !string.IsNullOrEmpty(Model.BillingAddress.ZipPostalCode))
                                     {
                                         <text>,</text>
@@ -152,6 +153,7 @@
                         @Html.Raw(Model.BillingAddress.FormattedCustomAddressAttributes)
                     </li>
                 }
+    -->
                 @if (!String.IsNullOrEmpty(Model.PaymentMethod))
                 {
                     <li class="title">
@@ -567,7 +569,7 @@
                                         <label>@T("Order.Shipping"):</label>
                                     </td>
                                     <td class="cart-total-right">
-                                        <span>@Model.OrderShipping</span>
+                                        <span>@T("enums.nop.core.domain.tax.vatnumberstatus.unknown")</span>
                                     </td>
                                 </tr>
                             }

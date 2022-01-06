@@ -54,7 +54,7 @@
         </div>
         <div class="order-details-area">
             <div class="billing-info-wrap">
-                <div class="billing-info">
+                <!--div class="billing-info">
 	                <div class="title">
 	                    <strong>@T("Order.BillingAddress")</strong>
 	                </div>
@@ -172,7 +172,7 @@
                             }
                         }
                     </ul>
-                </div>
+                </div-->
                 @if (!string.IsNullOrEmpty(Model.PaymentMethod))
                 {
                     <div class="payment-method-info">
@@ -691,7 +691,7 @@
                                         <label>@T("Order.Shipping"):</label>
                                     </td>
                                     <td class="cart-total-right">
-                                        <span>@Model.OrderShipping</span>
+                                        <span>@T("enums.nop.core.domain.tax.vatnumberstatus.unknown")</span>
                                     </td>
                                 </tr>
                             }

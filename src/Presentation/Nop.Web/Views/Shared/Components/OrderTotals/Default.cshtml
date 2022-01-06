@@ -36,11 +36,11 @@
                         {
                             if (!string.IsNullOrEmpty(Model.Shipping))
                             {
-                            <span class="value-summary">@Model.Shipping</span>
+                        <span class="value-summary">@T("enums.nop.core.domain.tax.vatnumberstatus.unknown")</span>
                             }
                             else
                             {
-                            <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
+                                <span>@T("ShoppingCart.Totals.CalculatedDuringCheckout")</span>
                             }
                         }
                         else
