@@ -18,7 +18,7 @@ namespace Nop.Web.Models.Checkout
 
         public AddressModel BillingNewAddress { get; set; }
 
-        public bool ShipToSameAddress { get; set; }
+        public bool ShipToSameAddress { get; set; } = true;
         public bool ShipToSameAddressAllowed { get; set; }
 
         /// <summary>
