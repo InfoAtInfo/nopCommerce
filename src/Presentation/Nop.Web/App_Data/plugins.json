@@ -74,6 +74,10 @@
     {
       "SystemName": "Payments.CashOnDelivery",
       "Version": "1.44"
+    },
+    {
+      "SystemName": "SevenSpikes.Nop.Plugins.RealOnePageCheckout",
+      "Version": "4.4"
     }
   ],
   "PluginNamesToUninstall": [],
