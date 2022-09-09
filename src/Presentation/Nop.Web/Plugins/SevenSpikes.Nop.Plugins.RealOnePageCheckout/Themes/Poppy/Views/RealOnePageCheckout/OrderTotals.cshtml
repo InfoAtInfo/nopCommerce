@@ -40,7 +40,7 @@
                     <span>
                         <span ng-if="vm.orderTotalData.requiresShipping">
                             <span ng-if="vm.orderTotalData.shipping" class="product-price">
-                                {{vm.orderTotalData.shipping}}
+                                @T("Checkout.ShippingAccordingToPricelist")
                             </span>
                             <span ng-if="!vm.orderTotalData.shipping">
                                 @T("ShoppingCart.Totals.CalculatedDuringCheckout")
