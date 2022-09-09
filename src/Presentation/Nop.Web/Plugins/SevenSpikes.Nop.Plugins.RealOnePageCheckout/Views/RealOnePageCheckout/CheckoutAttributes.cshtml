@@ -2,9 +2,9 @@
 
     @await Html.PartialAsync("_AjaxLoader", "checkout-attributes-loader")
 
-    <div class="section-title title">
+    <!--div class="section-title title">
         <strong>@T("SevenSpikes.RealOnePageCheckout.Public.CheckoutAttributes")</strong>
-    </div>
+    </!div-->
     <div class="section-body">
         <ul class="attribute-list">
             <li ng-repeat="attribute in vm.checkoutAttributesData" ng-show="{{attribute.customProperties.enabled && attribute.attributeControlType != 'FileUpload' && attribute.attributeControlType != 'ColorSquares'}}">
@@ -21,32 +21,32 @@
 
                     <ul ng-switch-when="RadioList" class="option-list">
                         <li ng-repeat="attributeValue in attribute.values">
-                            <input ng-change="attribute.updated = true; attributeValue.updated = true;" ng-model="vm.modelsData[attribute.id].radioListModel" id="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}" type="radio" name="checkout_attribute_{{attribute.id}}" value="{{attributeValue.id}}" ng-checked="attributeValue.isPreSelected"/>
+                            <input ng-change="attribute.updated = true; attributeValue.updated = true;" ng-model="vm.modelsData[attribute.id].radioListModel" id="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}" type="radio" name="checkout_attribute_{{attribute.id}}" value="{{attributeValue.id}}" ng-checked="attributeValue.isPreSelected" />
                             <label for="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}">
                                 {{attributeValue | priceAdjustment }}
                             </label>
                         </li>
                         <li class="hidden">
-                            <input type="hidden" ng-required="attribute.haveRequiredOption" ng-model="vm.modelsData[attribute.id].radioListModel"/>
+                            <input type="hidden" ng-required="attribute.haveRequiredOption" ng-model="vm.modelsData[attribute.id].radioListModel" />
                         </li>
                     </ul>
 
                     <ul ng-switch-when="Checkboxes" class="option-list">
                         <li ng-repeat="attributeValue in attribute.values">
-                            <input ng-click="attribute.updated = true; attributeValue.updated = true;" ng-model="vm.modelsData[attribute.id][attributeValue.id].checkBoxListModel" id="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}" type="checkbox" name="checkout_attribute_{{attribute.id}}" value="{{attributeValue.id}}" ng-checked="attributeValue.isPreSelected"/>
+                            <input ng-click="attribute.updated = true; attributeValue.updated = true;" ng-model="vm.modelsData[attribute.id][attributeValue.id].checkBoxListModel" id="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}" type="checkbox" name="checkout_attribute_{{attribute.id}}" value="{{attributeValue.id}}" ng-checked="attributeValue.isPreSelected" />
                             <label for="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}">
                                 {{attributeValue | priceAdjustment }}
                             </label>
                         </li>
                         <li class="hidden">
-                            <input type="hidden" ng-required="attribute.haveRequiredOption" ng-model="vm.modelsData[attribute.id].checkboxModel"/>
+                            <input type="hidden" ng-required="attribute.haveRequiredOption" ng-model="vm.modelsData[attribute.id].checkboxModel" />
                         </li>
                     </ul>
 
-                    <input ng-switch-when="TextBox" ng-blur="attribute.updated = true;" ng-model="attribute.defaultValue" name="checkout_attribute_{{attribute.id}}" type="text" class="textbox" id="checkout_attribute_{{attribute.id}}" value="{{attribute.defaultValue}}" ng-required="attribute.isRequired && attribute.customProperties.enabled"/>
+                    <input ng-switch-when="TextBox" ng-blur="attribute.updated = true;" ng-model="attribute.defaultValue" name="checkout_attribute_{{attribute.id}}" type="text" class="textbox" id="checkout_attribute_{{attribute.id}}" value="{{attribute.defaultValue}}" ng-required="attribute.isRequired && attribute.customProperties.enabled" />
 
                     <textarea ng-switch-when="MultilineTextbox" data-placeholder-attr="{{attribute.defaultValue}}" ng-blur="attribute.updated = true;" ng-model="attribute.defaultValue" id="checkout_attribute_{{attribute.id}}" name="checkout_attribute_{{attribute.id}}" ng-required="attribute.isRequired && attribute.customProperties.enabled"></textarea>
-                  
+
                     <div ng-switch-when="Datepicker">
                         <select ng-change="attribute.updated = true; attribute.day = vm.modelsData[attribute.id].day;" ng-model="vm.modelsData[attribute.id].day" name="checkout_attribute_{{attribute.id}}_day" id="checkout_attribute_{{attribute.id}}_day" class="not-loaded" ng-required="attribute.isRequired && attribute.customProperties.enabled" ng-options="d for d in vm.days track by d">
                             <option value="">Day</option>
@@ -65,7 +65,7 @@
 
                     <ul ng-switch-when="ReadonlyCheckboxes" class="option-list">
                         <li ng-repeat="attributeValue in attribute.values">
-                            <input ng-model="vm.modelsData[attribute.id][attributeValue.id].readonlyCheckBoxListModel" id="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}" type="checkbox" name="checkout_attribute_{{attribute.id}}" value="{{attributeValue.id}}" ng-checked="attributeValue.isPreSelected" disabled="disabled"/>
+                            <input ng-model="vm.modelsData[attribute.id][attributeValue.id].readonlyCheckBoxListModel" id="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}" type="checkbox" name="checkout_attribute_{{attribute.id}}" value="{{attributeValue.id}}" ng-checked="attributeValue.isPreSelected" disabled="disabled" />
                             <label for="checkout_attribute_{{attribute.id}}_{{attributeValue.id}}">
                                 {{attributeValue | priceAdjustment }}
                             </label>

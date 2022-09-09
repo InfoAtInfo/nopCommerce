@@ -214,8 +214,8 @@
         </div>
 
         <div class="options ship-to-same-address" ng-hide="vm.configData.shipToSameAddressDisabled">
-            <input type="checkbox" id="shipToSameAddress" name="shipToSameAddress" ng-model="vm.shipToSameAddress" value="{{vm.shipToSameAddress}}" />
-            <label for="shipToSameAddress"> @T("SevenSpikes.RealOnePageCheckout.Public.ShipToSameAddress")</label>
+            <input type="checkbox" id="shipToSameAddress" name="shipToSameAddress" ng-model="vm.shipToSameAddress" value="{{vm.shipToSameAddress}}" ng-true-value="false" ng-false-value="true" />
+            <label for="shipToSameAddress"> @T("SevenSpikes.RealOnePageCheckout.Public.ShipToDifferentAddress")</label>
         </div>
     </div>
 

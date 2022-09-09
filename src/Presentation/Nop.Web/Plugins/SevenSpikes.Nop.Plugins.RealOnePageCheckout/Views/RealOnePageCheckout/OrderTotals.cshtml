@@ -26,7 +26,6 @@
                 <td class="cart-total-left">
                     <span>@T("ShoppingCart.Totals.Shipping"):</span>
                     <span ng-show="vm.orderTotalData.requiresShipping && vm.orderTotalData.selectedShippingMethod" class="selected-shipping-method">
-                        {{vm.stringFormat('@T("ShoppingCart.Totals.Shipping.Method")', vm.orderTotalData.selectedShippingMethod) }}
                     </span>
                 </td>
                 <td class="cart-total-right">
