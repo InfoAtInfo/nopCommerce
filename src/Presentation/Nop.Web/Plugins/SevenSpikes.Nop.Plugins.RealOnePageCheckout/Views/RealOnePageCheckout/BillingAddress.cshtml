@@ -47,16 +47,6 @@
             </span>
         </div>
 
-        <div class="inputs" ng-hide="vm.billingData.settings.companyEnabled === false">
-            <label for="billingCompany">
-                @T("Address.Fields.Company"):
-            </label> <input type="text" ng-required="vm.requiredFields['company']" id="billingCompany" name="billingCompany" ng-model-options="{ updateOn: 'default blur', debounce: {'default': @debounceTime, 'blur': 0} }" ng-class="{'has-error' : billingForm['billingCompany'].$invalid && billingForm.$$parentForm.sySubmitted, 'required' : field.required}" ng-model="vm.billingData.selectedBillingAddress.company" value="{{vm.billingData.selectedBillingAddress.company}}" />
-            <span ng-show="vm.billingData.settings.companyRequired" class="required">*</span>
-            <span class="message-error" ng-show="vm.requiredFields['company'] && billingForm.billingCompany.$invalid && billingForm.$$parentForm.sySubmitted">
-                @T("SevenSpikes.RealOnePageCheckout.BillingAddress.Error.Company")
-            </span>
-        </div>
-
         <div class="inputs" ng-hide="vm.billingData.settings.countryEnabled === false">
             <label for="billingCountry">
                 @T("Address.Fields.Country"):
@@ -160,6 +150,16 @@
             <span>{{vm.billingData.selectedBillingAddress.vat.vatNumberStatus}}</span>
             <span class="message-error" ng-show="vm.requiredFields['billingVatNumber'] && billingForm.billingVatNumber.$invalid && billingForm.$$parentForm.sySubmitted">
                 @T("SevenSpikes.RealOnePageCheckout.BillingAddress.Error.VatNumber")
+            </span>
+        </div>
+
+        <div class="inputs" ng-hide="vm.billingData.settings.companyEnabled === false">
+            <label for="billingCompany">
+                @T("Address.Fields.Company"):
+            </label> <input type="text" ng-required="vm.requiredFields['company']" id="billingCompany" name="billingCompany" ng-model-options="{ updateOn: 'default blur', debounce: {'default': @debounceTime, 'blur': 0} }" ng-class="{'has-error' : billingForm['billingCompany'].$invalid && billingForm.$$parentForm.sySubmitted, 'required' : field.required}" ng-model="vm.billingData.selectedBillingAddress.company" value="{{vm.billingData.selectedBillingAddress.company}}" />
+            <span ng-show="vm.billingData.settings.companyRequired" class="required">*</span>
+            <span class="message-error" ng-show="vm.requiredFields['company'] && billingForm.billingCompany.$invalid && billingForm.$$parentForm.sySubmitted">
+                @T("SevenSpikes.RealOnePageCheckout.BillingAddress.Error.Company")
             </span>
         </div>
 

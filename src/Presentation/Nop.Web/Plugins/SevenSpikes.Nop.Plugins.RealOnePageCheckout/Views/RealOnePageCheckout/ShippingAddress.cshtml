@@ -51,16 +51,6 @@
             </span>
         </div>
 
-        <div class="inputs" ng-hide="vm.shippingData.settings.companyEnabled === false">
-            <label for="shippingCompany">
-                @T("Address.Fields.Company"):
-            </label> <input type="text" id="shippingCompany" name="shippingCompany" ng-required="vm.requiredFields['company']" ng-model-options="{ updateOn: 'default blur', debounce: {'default': @debounceTime, 'blur': 0} }" ng-class="{'has-error' : shippingForm['shippingCompany'].$invalid && shippingForm.$$parentForm.sySubmitted, 'required' : field.required}" ng-model="vm.shippingData.selectedShippingAddress.company" value="{{vm.shippingData.selectedShippingAddress.company}}" />
-            <span ng-show="vm.shippingData.settings.companyRequired" class="required">*</span>
-            <span class="message-error" ng-show="vm.requiredFields['company'] && shippingForm.shippingCompany.$invalid && shippingForm.$$parentForm.sySubmitted">
-                @T("SevenSpikes.RealOnePageCheckout.ShippingAddress.Error.Company")
-            </span>
-        </div>
-
         <div class="inputs" ng-hide="vm.shippingData.settings.countryEnabled === false">
             <label for="shippingCountry">
                 @T("Address.Fields.Country"):
@@ -154,6 +144,16 @@
             <span ng-show="vm.shippingData.settings.faxRequired" class="required">*</span>
             <span class="message-error" ng-show="vm.requiredFields['faxNumber'] && shippingForm.shippingFaxNumber.$invalid && shippingForm.$$parentForm.sySubmitted">
                 @T("SevenSpikes.RealOnePageCheckout.ShippingAddress.Error.FaxNumber")
+            </span>
+        </div>
+
+        <div class="inputs" ng-hide="vm.shippingData.settings.companyEnabled === false">
+            <label for="shippingCompany">
+                @T("Address.Fields.Company"):
+            </label> <input type="text" id="shippingCompany" name="shippingCompany" ng-required="vm.requiredFields['company']" ng-model-options="{ updateOn: 'default blur', debounce: {'default': @debounceTime, 'blur': 0} }" ng-class="{'has-error' : shippingForm['shippingCompany'].$invalid && shippingForm.$$parentForm.sySubmitted, 'required' : field.required}" ng-model="vm.shippingData.selectedShippingAddress.company" value="{{vm.shippingData.selectedShippingAddress.company}}" />
+            <span ng-show="vm.shippingData.settings.companyRequired" class="required">*</span>
+            <span class="message-error" ng-show="vm.requiredFields['company'] && shippingForm.shippingCompany.$invalid && shippingForm.$$parentForm.sySubmitted">
+                @T("SevenSpikes.RealOnePageCheckout.ShippingAddress.Error.Company")
             </span>
         </div>
 
