@@ -34,5 +34,7 @@
         /// Gets or sets the picture virtual path
         /// </summary>
         public string VirtualPath { get; set; }
+
+        public string WebPicture { get; set; }
     }
 }
