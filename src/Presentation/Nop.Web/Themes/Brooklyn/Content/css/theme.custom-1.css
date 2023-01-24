@@ -5,3 +5,11 @@
 .mega-menu .categories .picture img {
 max-width: 100%;
 }
+
+.ui-dialog-content{
+overflow: scroll;
+}
+
+div.attribute-values textarea{
+width: 100%;
+}

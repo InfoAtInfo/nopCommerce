@@ -572,6 +572,11 @@ namespace Nop.Services.Media
                 await DeletePictureThumbsAsync(picture);
                 pictureBinary = await LoadPictureBinaryAsync(picture);
 
+                if (picture.WebPicture != null)
+                {
+                    return (picture.WebPicture, picture);
+                }
+
                 if ((pictureBinary?.Length ?? 0) == 0)
                     return showDefaultPicture ? (await GetDefaultPictureUrlAsync(targetSize, defaultPictureType, storeLocation), picture) : (string.Empty, picture);
 
