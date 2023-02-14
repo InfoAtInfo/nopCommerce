@@ -96,9 +96,15 @@ Publish the Nop.Web project with next parameters: 	Publish method - File System
 														
 Configure dataSettings in App_Data folder if you are using an existing database. Example path yourStore\src\Presentation\Nop.Web\bin\Release\net5.0\publish\App_Data
 
-Install nginx: sudo apt-get install nginx
-Start nginx: sudo systemctl start nginx
-Status of nginx: sudo systemctl status nginx
+Install nginx: 
+
+			sudo apt-get install nginx
+Start nginx: 
+			
+			sudo systemctl start nginx
+Status of nginx: 
+			
+			sudo systemctl status nginx
 
 Change default file on /etc/nginx/sites-available.
 Example default file:
@@ -123,15 +129,20 @@ Example default file:
 					}
 				}
 
-Create folder for your project: mkdir /var/www/yourFolder	
+Create folder for your project: 
+				
+				mkdir /var/www/yourFolder	
 Upload the published project to /var/www/yourFolder.
 Create bin folder: 
-	sudo mkdir var/www/yourFolder/bin
+
+				sudo mkdir var/www/yourFolder/bin
 Create logs folder: 
-	sudo mkdir var/www/yourFolder/logs
+				
+				sudo mkdir var/www/yourFolder/logs
 Add permissions:
-		sudo chgrp -R www-data var/www/yourFolder/
-		sudo chown -R www-data var/www/yourFolder/
+
+				sudo chgrp -R www-data var/www/yourFolder/
+				sudo chown -R www-data var/www/yourFolder/
 		
 Create service for your application on the path /etc/systemd/system/yourService.service
 Example yourService file:
@@ -154,19 +165,39 @@ Example yourService file:
 				[Install]
 				WantedBy=multi-user.target
 				
-Start the service: sudo systemctl start yourService.service
-Status of your service: sudo systemctl status yourService.service
-Restart nginx: sudo systemctl restart nginx
+Start the service:
+
+				sudo systemctl start yourService.service
+				
+Status of your service: 
+
+				sudo systemctl status yourService.service
+				
+Restart nginx: 
+
+				sudo systemctl restart nginx
+				
 	
 #Using SSL Certificate
-Install Certbot: sudo apt-get install python3-certbot-nginx
-Communicate with Let's Encrypt and complete the SSL binding: sudo certbot --nginx -d yourDomain
+Install Certbot: 
+
+				sudo apt-get install python3-certbot-nginx
+				
+Communicate with Let's Encrypt and complete the SSL binding: 
+
+				sudo certbot --nginx -d yourDomain
+				
 When binding is finished, in the console should be a written path of the certificate and the associated key and you should save them.
-Create a config file for certificate: sudo nano /etc/nginx/snippets/certificateConfiguration.conf
+Create a config file for certificate: 
+
+				sudo nano /etc/nginx/snippets/certificateConfiguration.conf
+				
 Within this file, set the ssl_certificate directive to your certificate file and the ssl_certificate_key to the associated key. 
 This will look like the following:
-		ssl_certificate savedPathOfCertificate/nameOfCertificate.crt;
-		ssl_certificate_key savedPathOfCertificateKey/nameOfCertificateKey.key (nameOfCertificateKey.pem, etc...)
+
+				ssl_certificate savedPathOfCertificate/nameOfCertificate.crt;
+				ssl_certificate_key savedPathOfCertificateKey/nameOfCertificateKey.key (nameOfCertificateKey.pem, etc...)
+				
 Create ssl-params.conf: sudo nano /etc/nginx/snippets/ssl-params.conf
 Add the following into your ssl-params.conf snippet file:
 	
@@ -217,6 +248,7 @@ Change default file to:
 
 				return 302 https://$server_name$request_uri;
 			}
+			
 Change param "UseHttpXForwardedProto" to "true" in /var/www/yourFolder/App_Data/appsettings.json.
 Restart your service: sudo systemctl restart yourService.service.
 Open your website in the administration mode and open Stores in the Configuration section.
