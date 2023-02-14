@@ -125,8 +125,10 @@ Example default file:
 
 Create folder for your project: mkdir /var/www/yourFolder	
 Upload the published project to /var/www/yourFolder.
-Create bin folder: sudo mkdir var/www/yourFolder/bin
-Create logs folder: sudo mkdir var/www/yourFolder/logs
+Create bin folder: 
+	sudo mkdir var/www/yourFolder/bin
+Create logs folder: 
+	sudo mkdir var/www/yourFolder/logs
 Add permissions:
 		sudo chgrp -R www-data var/www/yourFolder/
 		sudo chown -R www-data var/www/yourFolder/
