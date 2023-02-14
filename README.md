@@ -97,7 +97,6 @@ Publish the Nop.Web project with next parameters: 	Publish method - File System
 Configure dataSettings in App_Data folder if you are using an existing database. Example path yourStore\src\Presentation\Nop.Web\bin\Release\net5.0\publish\App_Data
 
 Install nginx: 
-
 	sudo apt-get install nginx
 Start nginx: 
 			
