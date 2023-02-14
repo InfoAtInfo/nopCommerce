@@ -97,157 +97,148 @@ Publish the Nop.Web project with next parameters: 	Publish method - File System
 Configure dataSettings in App_Data folder if you are using an existing database. Example path yourStore\src\Presentation\Nop.Web\bin\Release\net5.0\publish\App_Data
 
 Install nginx: 
+
 	sudo apt-get install nginx
 Start nginx: 
 			
 	sudo systemctl start nginx
 Status of nginx: 
 			
-			sudo systemctl status nginx
+        sudo systemctl status nginx
 
 Change default file on /etc/nginx/sites-available.
 Example default file:
 		
-				# Default server configuration
-				#
-				server {
-					listen 80;
-					listen [::]:80;
+        # Default server configuration
+        #
+        server {
+                listen 80;
+                listen [::]:80;
 
-					server_name   yourDomain;
+                server_name   yourDomain;
 
-					location / {
-						proxy_pass         http://localhost:5000;
-						proxy_http_version 1.1;
-						proxy_set_header   Upgrade $http_upgrade;
-						proxy_set_header   Connection keep-alive;
-						proxy_set_header   Host $host;
-						proxy_cache_bypass $http_upgrade;
-						proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-						proxy_set_header   X-Forwarded-Proto $scheme;
-					}
-				}
+                location / {
+                        proxy_pass         http://localhost:5000;
+                        proxy_http_version 1.1;
+                        proxy_set_header   Upgrade $http_upgrade;
+                        proxy_set_header   Connection keep-alive;
+                        proxy_set_header   Host $host;
+                        proxy_cache_bypass $http_upgrade;
+                        proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+                        proxy_set_header   X-Forwarded-Proto $scheme;
+                }
+        }
 
 Create folder for your project: 
 				
-				mkdir /var/www/yourFolder	
+        mkdir /var/www/yourFolder	
 Upload the published project to /var/www/yourFolder.
 Create bin folder: 
 
-				sudo mkdir var/www/yourFolder/bin
+        sudo mkdir var/www/yourFolder/bin
 Create logs folder: 
 				
-				sudo mkdir var/www/yourFolder/logs
+        sudo mkdir var/www/yourFolder/logs
 Add permissions:
 
-				sudo chgrp -R www-data var/www/yourFolder/
-				sudo chown -R www-data var/www/yourFolder/
-		
+        sudo chgrp -R www-data var/www/yourFolder/
+        sudo chown -R www-data var/www/yourFolder/
 Create service for your application on the path /etc/systemd/system/yourService.service
 Example yourService file:
 		
-				[Unit]
-				Description=Example nopCommerce app running on Xubuntu
+        [Unit]
+        Description=Example nopCommerce app running on Xubuntu
 
-				[Service]
-				WorkingDirectory=/var/www/nopCommerce
-				ExecStart=/usr/bin/dotnet /var/www/nopCommerce/Nop.Web.dll
-				Restart=always
-				# Restart service after 10 seconds if the dotnet service crashes:
-				RestartSec=10
-				KillSignal=SIGINT
-				SyslogIdentifier=nopCommerce-example
-				User=www-data
-				Environment=ASPNETCORE_ENVIRONMENT=Production
-				Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+        [Service]
+        WorkingDirectory=/var/www/nopCommerce
+        ExecStart=/usr/bin/dotnet /var/www/nopCommerce/Nop.Web.dll
+        Restart=always
+        # Restart service after 10 seconds if the dotnet service crashes:
+        RestartSec=10
+        KillSignal=SIGINT
+        SyslogIdentifier=nopCommerce-example
+        User=www-data
+        Environment=ASPNETCORE_ENVIRONMENT=Production
+        Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
 
-				[Install]
-				WantedBy=multi-user.target
-				
+        [Install]
+        WantedBy=multi-user.target
 Start the service:
 
-				sudo systemctl start yourService.service
-				
+        sudo systemctl start yourService.service
 Status of your service: 
 
-				sudo systemctl status yourService.service
-				
+	sudo systemctl status yourService.service
 Restart nginx: 
 
-				sudo systemctl restart nginx
-				
-	
+	sudo systemctl restart nginx
 #Using SSL Certificate
 Install Certbot: 
 
-				sudo apt-get install python3-certbot-nginx
-				
+	sudo apt-get install python3-certbot-nginx
 Communicate with Let's Encrypt and complete the SSL binding: 
 
-				sudo certbot --nginx -d yourDomain
-				
+	sudo certbot --nginx -d yourDomain
 When binding is finished, in the console should be a written path of the certificate and the associated key and you should save them.
 Create a config file for certificate: 
 
-				sudo nano /etc/nginx/snippets/certificateConfiguration.conf
-				
+	sudo nano /etc/nginx/snippets/certificateConfiguration.conf
 Within this file, set the ssl_certificate directive to your certificate file and the ssl_certificate_key to the associated key. 
 This will look like the following:
 
-				ssl_certificate savedPathOfCertificate/nameOfCertificate.crt;
-				ssl_certificate_key savedPathOfCertificateKey/nameOfCertificateKey.key (nameOfCertificateKey.pem, etc...)
-				
+	ssl_certificate savedPathOfCertificate/nameOfCertificate.crt;
+	ssl_certificate_key savedPathOfCertificateKey/nameOfCertificateKey.key (nameOfCertificateKey.pem, etc...)
 Create ssl-params.conf: sudo nano /etc/nginx/snippets/ssl-params.conf
 Add the following into your ssl-params.conf snippet file:
 	
-		ssl_protocols TLSv1.3;
-		ssl_prefer_server_ciphers on;
-		ssl_dhparam /etc/nginx/dhparam.pem; 
-		ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
-		ssl_ecdh_curve secp384r1;
-		ssl_session_timeout  10m;
-		ssl_session_cache shared:SSL:10m;
-		ssl_session_tickets off;
-		ssl_stapling on;
-		ssl_stapling_verify on;
-		resolver 8.8.8.8 8.8.4.4 valid=300s;
-		resolver_timeout 5s;
-		add_header X-Frame-Options DENY;
-		add_header X-Content-Type-Options nosniff;
-		add_header X-XSS-Protection "1; mode=block";
+        ssl_protocols TLSv1.3;
+        ssl_prefer_server_ciphers on;
+        ssl_dhparam /etc/nginx/dhparam.pem; 
+        ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+        ssl_ecdh_curve secp384r1;
+        ssl_session_timeout  10m;
+        ssl_session_cache shared:SSL:10m;
+        ssl_session_tickets off;
+        ssl_stapling on;
+        ssl_stapling_verify on;
+        resolver 8.8.8.8 8.8.4.4 valid=300s;
+        resolver_timeout 5s;
+        add_header X-Frame-Options DENY;
+        add_header X-Content-Type-Options nosniff;
+        add_header X-XSS-Protection "1; mode=block";
 Change default file to:
-			# Default server configuration
-			#
-			server {
-				listen 443 ssl;
-				listen [::]:443 ssl;
-				
-				include snippets/self-signed.conf;
-				include snippets/ssl-params.conf;
 
-				server_name   yourDomain;
+        # Default server configuration
+        #
+        server {
+                listen 443 ssl;
+                listen [::]:443 ssl;
 
-				location / {
-				  proxy_pass         https://localhost:5001;
-				  proxy_http_version 1.1;
-				  proxy_set_header   Upgrade $http_upgrade;
-				  proxy_set_header   Connection keep-alive;
-				  proxy_set_header   Host $host;
-				  proxy_cache_bypass $http_upgrade;
-				  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
-				  proxy_set_header   X-Forwarded-Proto $scheme;
-				}
-			}
+                include snippets/self-signed.conf;
+                include snippets/ssl-params.conf;
 
-			server {
-				listen 80;
-				listen [::]:80;
+                server_name   yourDomain;
 
-				server_name yourDomain;
+                location / {
+                  proxy_pass         https://localhost:5001;
+                  proxy_http_version 1.1;
+                  proxy_set_header   Upgrade $http_upgrade;
+                  proxy_set_header   Connection keep-alive;
+                  proxy_set_header   Host $host;
+                  proxy_cache_bypass $http_upgrade;
+                  proxy_set_header   X-Forwarded-For $proxy_add_x_forwarded_for;
+                  proxy_set_header   X-Forwarded-Proto $scheme;
+                }
+        }
 
-				return 302 https://$server_name$request_uri;
-			}
-			
+        server {
+                listen 80;
+                listen [::]:80;
+
+                server_name yourDomain;
+
+                return 302 https://$server_name$request_uri;
+        }
 Change param "UseHttpXForwardedProto" to "true" in /var/www/yourFolder/App_Data/appsettings.json.
 Restart your service: sudo systemctl restart yourService.service.
 Open your website in the administration mode and open Stores in the Configuration section.
