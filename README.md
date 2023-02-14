@@ -89,19 +89,19 @@ Ena - is nopCommerce the application.
 Clone the repository and publish the Nop.Web project.
 Configure dataSettings if you are using an existing database. Example path yourStore\src\Presentation\Nop.Web\bin\Release\net5.0\publish\App_Data
 
-Setup the Ena application on the ubuntu VPS server
-	Publish the Nop.Web project with next parameters: 	Publish method - File System
-														Deployment Mode - Self-contained
-														Target Runtime - linux-x64
+#Setup the Ena application on the ubuntu VPS server
+Publish the Nop.Web project with next parameters: 	Publish method - File System
+													Deployment Mode - Self-contained
+													Target Runtime - linux-x64
 														
-	Configure dataSettings in App_Data folder if you are using an existing database. Example path yourStore\src\Presentation\Nop.Web\bin\Release\net5.0\publish\App_Data
+Configure dataSettings in App_Data folder if you are using an existing database. Example path yourStore\src\Presentation\Nop.Web\bin\Release\net5.0\publish\App_Data
 
-	Install nginx: sudo apt-get install nginx
-	Start nginx: sudo systemctl start nginx
-	Status of nginx: sudo systemctl status nginx
+Install nginx: sudo apt-get install nginx
+Start nginx: sudo systemctl start nginx
+Status of nginx: sudo systemctl status nginx
 
-	Change default file on /etc/nginx/sites-available.
-		Example default file:
+Change default file on /etc/nginx/sites-available.
+Example default file:
 		
 				# Default server configuration
 				#
@@ -123,16 +123,16 @@ Setup the Ena application on the ubuntu VPS server
 					}
 				}
 
-	Create folder for your project: mkdir /var/www/yourFolder	
-	Upload the published project to /var/www/yourFolder.
-	Create bin folder: sudo mkdir var/www/yourFolder/bin
-	Create logs folder: sudo mkdir var/www/yourFolder/logs
-	Add permissions:
+Create folder for your project: mkdir /var/www/yourFolder	
+Upload the published project to /var/www/yourFolder.
+Create bin folder: sudo mkdir var/www/yourFolder/bin
+Create logs folder: sudo mkdir var/www/yourFolder/logs
+Add permissions:
 		sudo chgrp -R www-data var/www/yourFolder/
 		sudo chown -R www-data var/www/yourFolder/
 		
-	Create service for your application on the path /etc/systemd/system/yourService.service
-		Example yourService file:
+Create service for your application on the path /etc/systemd/system/yourService.service
+Example yourService file:
 		
 				[Unit]
 				Description=Example nopCommerce app running on Xubuntu
@@ -152,38 +152,38 @@ Setup the Ena application on the ubuntu VPS server
 				[Install]
 				WantedBy=multi-user.target
 				
-	Start the service: sudo systemctl start yourService.service
-	Status of your service: sudo systemctl status yourService.service
-	Restart nginx: sudo systemctl restart nginx
+Start the service: sudo systemctl start yourService.service
+Status of your service: sudo systemctl status yourService.service
+Restart nginx: sudo systemctl restart nginx
 	
-Using SSL Certificate
-	Install Certbot: sudo apt-get install python3-certbot-nginx
-	Communicate with Let's Encrypt and complete the SSL binding: sudo certbot --nginx -d yourDomain
-	When binding is finished, in the console should be a written path of the certificate and the associated key and you should save them.
-	Create a config file for certificate: sudo nano /etc/nginx/snippets/certificateConfiguration.conf
-	Within this file, set the ssl_certificate directive to your certificate file and the ssl_certificate_key to the associated key. 
-	This will look like the following:
-			ssl_certificate savedPathOfCertificate/nameOfCertificate.crt;
-			ssl_certificate_key savedPathOfCertificateKey/nameOfCertificateKey.key (nameOfCertificateKey.pem, etc...)
-	Create ssl-params.conf: sudo nano /etc/nginx/snippets/ssl-params.conf
-	Add the following into your ssl-params.conf snippet file:
+#Using SSL Certificate
+Install Certbot: sudo apt-get install python3-certbot-nginx
+Communicate with Let's Encrypt and complete the SSL binding: sudo certbot --nginx -d yourDomain
+When binding is finished, in the console should be a written path of the certificate and the associated key and you should save them.
+Create a config file for certificate: sudo nano /etc/nginx/snippets/certificateConfiguration.conf
+Within this file, set the ssl_certificate directive to your certificate file and the ssl_certificate_key to the associated key. 
+This will look like the following:
+		ssl_certificate savedPathOfCertificate/nameOfCertificate.crt;
+		ssl_certificate_key savedPathOfCertificateKey/nameOfCertificateKey.key (nameOfCertificateKey.pem, etc...)
+Create ssl-params.conf: sudo nano /etc/nginx/snippets/ssl-params.conf
+Add the following into your ssl-params.conf snippet file:
 	
-			ssl_protocols TLSv1.3;
-			ssl_prefer_server_ciphers on;
-			ssl_dhparam /etc/nginx/dhparam.pem; 
-			ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
-			ssl_ecdh_curve secp384r1;
-			ssl_session_timeout  10m;
-			ssl_session_cache shared:SSL:10m;
-			ssl_session_tickets off;
-			ssl_stapling on;
-			ssl_stapling_verify on;
-			resolver 8.8.8.8 8.8.4.4 valid=300s;
-			resolver_timeout 5s;
-			add_header X-Frame-Options DENY;
-			add_header X-Content-Type-Options nosniff;
-			add_header X-XSS-Protection "1; mode=block";
-	Change default file to:
+		ssl_protocols TLSv1.3;
+		ssl_prefer_server_ciphers on;
+		ssl_dhparam /etc/nginx/dhparam.pem; 
+		ssl_ciphers EECDH+AESGCM:EDH+AESGCM;
+		ssl_ecdh_curve secp384r1;
+		ssl_session_timeout  10m;
+		ssl_session_cache shared:SSL:10m;
+		ssl_session_tickets off;
+		ssl_stapling on;
+		ssl_stapling_verify on;
+		resolver 8.8.8.8 8.8.4.4 valid=300s;
+		resolver_timeout 5s;
+		add_header X-Frame-Options DENY;
+		add_header X-Content-Type-Options nosniff;
+		add_header X-XSS-Protection "1; mode=block";
+Change default file to:
 			# Default server configuration
 			#
 			server {
@@ -215,8 +215,8 @@ Using SSL Certificate
 
 				return 302 https://$server_name$request_uri;
 			}
-	Change param "UseHttpXForwardedProto" to "true" in /var/www/yourFolder/App_Data/appsettings.json.
-	Restart your service: sudo systemctl restart yourService.service.
-	Open your website in the administration mode and open Stores in the Configuration section.
-	Click on Edit for the store that you want to use SSL for.
-	Change the store URL from HTTP to HTTPS and tick the "SSL enabled" checkbox.
+Change param "UseHttpXForwardedProto" to "true" in /var/www/yourFolder/App_Data/appsettings.json.
+Restart your service: sudo systemctl restart yourService.service.
+Open your website in the administration mode and open Stores in the Configuration section.
+Click on Edit for the store that you want to use SSL for.
+Change the store URL from HTTP to HTTPS and tick the "SSL enabled" checkbox.
