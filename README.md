@@ -98,10 +98,10 @@ Configure dataSettings in App_Data folder if you are using an existing database.
 
 Install nginx: 
 
-			sudo apt-get install nginx
+	sudo apt-get install nginx
 Start nginx: 
 			
-			sudo systemctl start nginx
+	sudo systemctl start nginx
 Status of nginx: 
 			
 			sudo systemctl status nginx
