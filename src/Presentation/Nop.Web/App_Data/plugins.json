@@ -78,6 +78,14 @@
     {
       "SystemName": "SevenSpikes.Nop.Plugins.RealOnePageCheckout",
       "Version": "4.4"
+    },
+    {
+      "SystemName": "FoxNetSoft.RedirectManager",
+      "Version": "1.21"
+    },
+    {
+      "SystemName": "Widgets.GoogleAnalytics",
+      "Version": "1.67"
     }
   ],
   "PluginNamesToUninstall": [],
