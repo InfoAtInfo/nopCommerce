@@ -1,0 +1,49 @@
+1. Register Microsoft key and feed:
+
+wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+
+sudo dpkg -i packages-microsoft-prod.deb
+
+2. Install nginx
+
+Install the nginx package:
+sudo apt-get install nginx
+
+Run the nginx service:
+sudo systemctl start nginx
+
+...and check its status:
+sudo systemctl status nginx
+
+3. Upload app to /var/www/domain (/var/www/ena.rs)
+Publish the app localy: 
+	-Right click Nop.Web in VS2019 and click 'Publish'
+	-In the dialog, select: Release, linux-x64
+	-When uploading via FTP, App_Data and wwwroot folders should be skipped and not modified
+
+
+4. Grant permission (from /var/www folder):
+cd ..
+sudo chgrp -R www-data domain (sudo chgrp -R www-data ena.rs)
+sudo chown -R www-data domain (sudo chown -R www-data ena.rs)
+
+5. Add 'default' file to /etc/nginx/sites-available
+
+
+6. Execute (we have to create a symbolic link that connects the file in "/etc/nginx/sites-available" to the folder "/etc/nginx/sites-enabled"):
+*change mydomain.com to ena.rs
+sudo ln -s /etc/nginx/sites-available/mydomain.com /etc/nginx/sites-enabled/
+
+7. Create service file:
+cd /etc/systemd/system/
+copy file ena.service
+
+8. Start the service:
+sudo systemctl start ena.rs.service
+
+sudo systemctl status ena.rs.service
+
+
+
+*restart nginx: sudo systemctl restart nginx
+**check logs:   sudo journalctl --since "1 minute ago" | grep "mydomain"
