@@ -2387,6 +2387,11 @@ tr.even, div.dataTables_scrollHead > div > table > thead > tr {
   padding-left: 0 !important;
 }
 
+.dataTables_scroll .dataTables_scrollBody .table tbody td > img {
+  width: 75px;
+  height: 32px;
+}
+
 div.dataTables_wrapper div.dataTables_paginate {
   text-align: center;
 }
