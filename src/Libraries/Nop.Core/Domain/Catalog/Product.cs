@@ -36,6 +36,11 @@ namespace Nop.Core.Domain.Catalog
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the name changed
+        /// </summary>
+        public bool NameChanged { get; set; }
+
+        /// <summary>
         /// Gets or sets the short description
         /// </summary>
         public string ShortDescription { get; set; }

@@ -973,6 +973,11 @@ namespace Nop.Web.Areas.Admin.Controllers
                 var previousWarehouseId = product.WarehouseId;
                 var previousProductType = product.ProductType;
 
+                if (!product.Name.Equals(model.Name))
+                {
+                    product.NameChanged = true;
+                }
+
                 //product
                 product = model.ToEntity(product);
 
