@@ -156,6 +156,11 @@ namespace Nop.Core.Domain.Catalog
         public bool RequireOtherProducts { get; set; }
 
         /// <summary>
+        /// Gets or sets is scraped product
+        /// </summary>
+        public bool IsScrapedProduct { get; set; }
+
+        /// <summary>
         /// Gets or sets a required product identifiers (comma separated)
         /// </summary>
         public string RequiredProductIds { get; set; }

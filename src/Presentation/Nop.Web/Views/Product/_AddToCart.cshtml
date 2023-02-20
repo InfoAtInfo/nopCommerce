@@ -95,6 +95,10 @@
                 </div>
             }
         }
+        @if (Model.IsScrapedProduct == true)
+        {
+            <p>Ovaj proizvod se ceka 10 do 15</p>
+        }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAddInfo, additionalData = Model })
     </div>
 }

@@ -70,6 +70,7 @@ namespace Nop.Web.Models.Catalog
         public string DeliveryDate { get; set; }
 
         public bool IsRental { get; set; }
+        public bool IsScrapedProduct { get; set; }
         public DateTime? RentalStartDate { get; set; }
         public DateTime? RentalEndDate { get; set; }
 
@@ -159,6 +160,8 @@ namespace Nop.Web.Models.Catalog
 
             //rental
             public bool IsRental { get; set; }
+
+            public bool IsScrapedProduct { get; set; }
 
             //pre-order
             public bool AvailableForPreOrder { get; set; }
