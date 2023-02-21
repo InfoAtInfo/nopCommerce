@@ -1,0 +1,194 @@
+﻿<Language Name="English" IsRightToLeft="false">
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.Enabled">
+    <Value>Enabled</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.Enabled.Hint">
+    <Value>Enabled Redirect Manager.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.Enabled">
+    <Value>Enabled</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.Enabled.Hint">
+    <Value>Enabled Redirect Manager.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.RemoveLocalizedPrefix">
+    <Value>Remove localized prefix from the URL</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.RemoveLocalizedPrefix.Hint">
+    <Value>Remove localized prefix from the URL if you use a parameter 'SEO friendly URLs with multiple languages enabled'.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.EnableLog404Error">
+    <Value>Enable log of 404 errors</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.EnableLog404Error.Hint">
+    <Value>Plugin will save information about 404 errors in own log table.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.showDebugInfo">
+    <Value>Enable Debugging</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.showDebugInfo.Hint">
+    <Value>Write debugging information into file. In ~/App_Data/ folder.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.SerialNumber">
+    <Value>Serial number</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.SerialNumber.Hint">
+    <Value>Serial number.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.StoreUrl">
+    <Value>Website address (for registration)</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Settings.StoreUrl.Hint">
+    <Value>Website address (for registration).</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.IsRegisted">
+    <Value>Registered version.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.IsNoRegisted">
+    <Value>Unregistered version is fully operational. It has only one limitation (50 routes).</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.IsExpired">
+    <Value>Your license has expired, you should renew the license with a 50% discount.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.ClearLogFile">
+    <Value>Clear the log-file</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.GetLogFile">
+    <Value>Download the log-file</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Menu.Brand">
+    <Value>FoxNetSoft</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Menu.Name">
+    <Value>Redirect Manager</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Menu.URLRewrites">
+    <Value>Url rewrites</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Menu.404Errors">
+    <Value>List of 404 errors</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Menu.Configure">
+    <Value>Configure</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.TabName">
+    <Value>List of Urls</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Errors">
+    <Value>List of 404 errors</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.URLRewrites">
+    <Value>Url rewrites</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.Fields.Store">
+    <Value>Store</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.Fields.Count">
+    <Value>Count of requests</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.Fields.Url">
+    <Value>Url</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.Store">
+    <Value>Store</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RequestUrl">
+    <Value>Request Url</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RequestUrl.Required">
+    <Value>The request Url is required.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RequestUrl.WrongCharacter">
+    <Value>The request Url has wrong character.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.TargetUrl">
+    <Value>Target Url</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.Comment">
+    <Value>Comment</Value>
+  </LocaleResource>
+	<LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.PreserveQueryStrings">
+		<Value>Preserve Query Strings</Value>
+	</LocaleResource>
+	<LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RedirectType">
+    <Value>Redirect Type</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.DeleteSelected">
+    <Value>Delete Selected</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.DeleteAll">
+    <Value>Delete All</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.List.SearchUrl">
+    <Value>Url</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.List.SearchUrl.Hint">
+    <Value>Search by specific Url.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.List.SearchStore">
+    <Value>Store</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.List.SearchStore.Hint">
+    <Value>Search by specific store.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchRequestUrl">
+    <Value>Request Url</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchRequestUrl.Hint">
+    <Value>Search by specific request Url.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchTargetUrl">
+    <Value>Target Url</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchTargetUrl.Hint">
+    <Value>Search by specific target Url.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchStore">
+    <Value>Store</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchStore.Hint">
+    <Value>Search by specific store.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchRedirectType">
+    <Value>Redirect type</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.List.SearchRedirectType.Hint">
+    <Value>Search by specific redirect type.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.Url404Error.DeletedAll">
+    <Value>All 404Error Urls have been deleted successfully.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.DeletedAll">
+    <Value>All urls have been deleted successfully.</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.ImportTip">
+    <Value>You can download a CSV file with a list of URL rewrites:</Value>
+  </LocaleResource>
+  <LocaleResource Name="Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.ImportSuccess">
+    <Value>{0} URL rewrites have been successfully imported</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.Default">
+    <Value>Default</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.MovedPermanently301">
+    <Value>301 Moved Permanently</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.Found302">
+    <Value>302 Found</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.SeeOther303">
+    <Value>303 See Other</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.TemporaryRedirect307">
+    <Value>307 Temporary Redirect</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.NotAuthorized403">
+    <Value>403 Not Authorized</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.NotFound404">
+    <Value>404 Not Found</Value>
+  </LocaleResource>
+  <LocaleResource Name="enums.FoxNetSoft.Plugin.Misc.RedirectManager.Domain.RedirectType.NoContent204">
+    <Value>204 No Content</Value>
+  </LocaleResource>
+</Language>

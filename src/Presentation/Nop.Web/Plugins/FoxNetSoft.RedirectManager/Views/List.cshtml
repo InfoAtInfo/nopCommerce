@@ -1,0 +1,425 @@
+﻿@model FoxNetSoft.Plugin.Misc.RedirectManager.Models.UrlRewriteSearchModel
+@using FoxNetSoft.Plugin.Misc.RedirectManager.Models
+@{
+    Layout = "_AdminLayout";
+    //page title
+    ViewBag.Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.URLRewrites").Text;
+    Html.SetActiveMenuItemSystemName("FoxNetSoft.RedirectManager.RedirectedUrls");
+}
+@{
+    const string hideSearchBlockAttributeName = "FoxNetSoft.RedirectManager.URLRewrites.HideSearchBlock";
+    var hideSearchBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), hideSearchBlockAttributeName);
+}
+
+<form asp-controller="RedirectManagerUrlRewrite" asp-action="List" method="post">
+    <div class="content-header clearfix">
+        <h1 class="float-left">
+            @T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.URLRewrites")
+        </h1>
+        <div class="float-right">
+            <button type="submit" id="exporttocsv" name="exporttocsv" class="btn bg-red">
+                <i class="fa fa-file-excel-o"></i>
+                @T("Admin.Common.ExportToCsv")
+            </button>
+            <button type="button" name="importcsv" class="btn bg-olive" data-toggle="modal" data-target="#importcsv-window">
+                <i class="fa fa-upload"></i>
+                @T("Admin.Common.ImportFromCsv")
+            </button>
+            <button type="submit" id="clearall" name="clearall" class="btn bg-red">
+                <i class="fa fa-trash-o"></i>
+                @T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.DeleteAll")
+            </button>
+            <nop-action-confirmation asp-button-id="clearall" />
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="card card-default card-search">
+                    <div class="card-body">
+                        <div class="row search-row @(!hideSearchBlock ? "opened" : "")" data-hideAttribute="@hideSearchBlockAttributeName">
+                            <div class="search-text">@T("Admin.Common.Search")</div>
+                            <div class="icon-search"><i class="fas fa-search" aria-hidden="true"></i></div>
+                            <div class="icon-collapse"><i class="far fa-angle-@(!hideSearchBlock ? "up" : "down")" aria-hidden="true"></i></div>
+                        </div>
+                        <div class="search-body @(hideSearchBlock ? "closed" : "")">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="SearchRequestUrl" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="SearchRequestUrl" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="SearchTargetUrl" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-editor asp-for="SearchTargetUrl" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row" @(Model.HideStoresList ? Html.Raw("style=\"display:none\"") : null)>
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="SearchStoreId" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-select asp-for="SearchStoreId" asp-items="Model.AvailableStores" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-4">
+                                            <nop-label asp-for="RedirectTypeIds" />
+                                        </div>
+                                        <div class="col-md-8">
+                                            <nop-select asp-for="RedirectTypeIds" asp-items="Model.AvailableRedirectTypes" asp-multiple="true" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="text-center col-12">
+                                    <button type="button" id="search-urlrewrites" class="btn btn-primary btn-search">
+                                        <i class="fas fa-search"></i>
+                                        @T("Admin.Common.Search")
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card card-default">
+                    <div class="card-body">
+                        <script>
+        var allStores = [
+                        {
+                            Id : "0",
+                            Name : "@T("Common.All")"
+                        }
+                            @foreach (var store in Model.AvailableStores)
+                            {
+                                if (store.Value == "0")
+                                {
+                                    continue;
+                                }
+            <text>
+                , {
+                    Id: @store.Value,
+                    Name: "@(Html.Raw(JavaScriptEncoder.Default.Encode(store.Text)))"
+                }
+        </text>
+                            }
+                            ];
+
+                            var allRedirectTypes = [
+                            @{
+                                var firstItem = true;
+                                foreach (var redirectType in Model.AvailableRedirectTypes)
+                                {
+                                    if (redirectType.Value == "0")
+                                    {
+                                        continue;
+                                    }
+                                    if (!firstItem)
+                                    {
+                                        <text>
+                                                ,
+                                        </text>
+                                    }
+                                    firstItem = false;
+                                    <text>
+                                         {
+                                            Id: @redirectType.Value,
+                                            Name: "@(Html.Raw(JavaScriptEncoder.Default.Encode(redirectType.Text)))"
+                                         }
+                                    </text>
+                                    }
+                                }
+                            ];
+
+                        </script>
+
+
+                        @await Html.PartialAsync("Table", new DataTablesModel
+                   {
+                       Name = "urlrewrites-grid",
+                       UrlRead = new DataUrl("ListPost", "RedirectManagerUrlRewrite", null),
+                       UrlUpdate = new DataUrl("UrlRewriteUpdate", "RedirectManagerUrlRewrite", null),
+                       UrlDelete = new DataUrl("UrlRewriteDelete", "RedirectManagerUrlRewrite", null),
+                       SearchButtonId = "search-urlrewrites",
+                       Length = Model.PageSize,
+                       LengthMenu = Model.AvailablePageSizes,
+                       Filters = new List<FilterParameter>
+                                {
+                                    new FilterParameter(nameof(Model.SearchStoreId)),
+                                    new FilterParameter(nameof(Model.SearchRequestUrl)),
+                                    new FilterParameter(nameof(Model.SearchTargetUrl)),
+                                    new FilterParameter(nameof(Model.RedirectTypeIds))
+                                },
+                       ColumnCollection = new List<ColumnProperty>
+                                {
+                                new ColumnProperty(nameof(UrlRewriteModel.Store))
+                                {
+                                    Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.Store").Text,
+                                    Width = "100",
+                                    Visible = !Model.HideStoresList
+                                    //Render = new RenderCustom("renderStoreList"),
+                                    //Editable = true
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.RedirectType))
+                                {
+                                    Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RedirectType").Text,
+                                    Width = "200"
+                                    //Editable = true,
+                                    //Render = new RenderCustom("renderRedirectTypeList")
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.RequestUrl))
+                                {
+                                    Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RequestUrl").Text,
+                                    Editable = true,
+                                    EditType = EditType.String
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.TargetUrl))
+                                {
+                                    Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.TargetUrl").Text,
+                                    Editable = true,
+                                    EditType = EditType.String
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.PreserveQueryStrings))
+                                {
+                                    Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.PreserveQueryStrings").Text,
+                                    Width = "70",
+                                    ClassName = NopColumnClassDefaults.CenterAll,
+                                    Render = new RenderBoolean(),
+                                    Editable = true,
+                                    EditType = EditType.Checkbox
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.Comment))
+                                {
+                                    Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.Comment").Text,
+                                    Editable = true,
+                                    EditType = EditType.String
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.Id))
+                                {
+                                    Title = T("Admin.Common.Edit").Text,
+                                    Width = "100",
+                                    ClassName =  NopColumnClassDefaults.Button,
+                                    Render = new RenderButtonsInlineEdit()
+                                },
+                                new ColumnProperty(nameof(UrlRewriteModel.Id))
+                                {
+                                    Title = T("Admin.Common.Delete").Text,
+                                    Width = "100",
+                                    ClassName =  NopColumnClassDefaults.Button,
+                                    Render = new RenderButtonRemove(T("Admin.Common.Delete").Text)
+                                }
+                       }
+                   })
+
+                        <script>
+                            function renderStoreList(data, type, row, meta) {
+                                var options = '<select>';
+                                allStores.forEach(function (option_element) {
+                                    options = options + '<option value="' + option_element.Id + '"';
+                                    if (option_element.Id == row.StoreId) {
+                                        options = options + ' selected';
+                                    }
+                                    options = options + '>';
+                                    options = options + option_element.Name + '</option>';
+                                });
+                                options = options + '</select>';
+                                return options;
+                            }
+                            function renderRedirectTypeList(data, type, row, meta) {
+                                var options = '<select>';
+                                allRedirectTypes.forEach(function (option_element) {
+                                    options = options + '<option value="' + option_element.Id + '"';
+                                    if (option_element.Id == row.RedirectTypeId) {
+                                        options = options + ' selected';
+                                    }
+                                    options = options + '>';
+                                    options = options + option_element.Name + '</option>';
+                                });
+                                options = options + '</select>';
+                                return options;
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<form>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="cards-group">
+                <div class="card card-default no-margin">
+                    <div class="card-header">
+                        @T("Admin.Common.AddNewRecord")
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="@Model.AddUrlRewrite.StoreId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-select asp-for="@Model.AddUrlRewrite.StoreId" asp-items="@Model.AddUrlRewrite.AvailableStores" />
+                                <span asp-validation-for="@Model.AddUrlRewrite.StoreId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="@Model.AddUrlRewrite.RedirectTypeId" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-select asp-for="@Model.AddUrlRewrite.RedirectTypeId" asp-items="@Model.AddUrlRewrite.AvailableRedirectTypes" />
+                                <span asp-validation-for="@Model.AddUrlRewrite.RedirectTypeId"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="@Model.AddUrlRewrite.RequestUrl" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="@Model.AddUrlRewrite.RequestUrl" />
+                                <span asp-validation-for="@Model.AddUrlRewrite.RequestUrl"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="@Model.AddUrlRewrite.TargetUrl" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="@Model.AddUrlRewrite.TargetUrl" />
+                                <span asp-validation-for="@Model.AddUrlRewrite.TargetUrl"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="AddUrlRewrite.PreserveQueryStrings" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="AddUrlRewrite.PreserveQueryStrings" />
+                                <span asp-validation-for="AddUrlRewrite.PreserveQueryStrings"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <nop-label asp-for="AddUrlRewrite.Comment" />
+                            </div>
+                            <div class="col-md-9">
+                                <nop-editor asp-for="AddUrlRewrite.Comment" />
+                                <span asp-validation-for="AddUrlRewrite.Comment"></span>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <br />
+                            </div>
+                            <div class="col-md-9">
+                                <p>
+                                    You can use the next tokens:
+                                    <br />
+                                    <b>%remover1%</b> - remove the first part of Url
+                                    <br />
+                                    <b>%lastpart%</b> - redirect to the last part of Url
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-md-9 offset-md-3">
+                                <button type="button" id="addUrlRewrite" class="btn btn-primary">@T("Admin.Common.AddNewRecord")</button>
+                            </div>
+                        </div>
+                    </div>
+                    <script>
+                    $(document).ready(function () {
+                        $('#addUrlRewrite').click(function () {
+                            $('#addUrlRewrite').attr('disabled', true);
+                            var postData = {
+                                StoreId: $("#@Html.IdFor(model => model.AddUrlRewrite.StoreId)").val(),
+                                RedirectTypeId: $("#@Html.IdFor(model => model.AddUrlRewrite.RedirectTypeId)").val(),
+                                RequestUrl: $("#@Html.IdFor(model => model.AddUrlRewrite.RequestUrl)").val(),
+                                TargetUrl: $("#@Html.IdFor(model => model.AddUrlRewrite.TargetUrl)").val(),
+                                PreserveQueryStrings: $("#@Html.IdFor(model => model.AddUrlRewrite.PreserveQueryStrings)").is(':checked'),
+                                Comment: $("#@Html.IdFor(model => model.AddUrlRewrite.Comment)").val()
+                            };
+                            addAntiForgeryToken(postData);
+
+                            $.ajax({
+                                cache: false,
+                                type: "POST",
+                                url: "@Html.Raw(Url.Action("UrlRewriteAdd", "RedirectManagerUrlRewrite"))",
+                                data: postData,
+                                success: function (data, textStatus, jqXHR) {
+                                    if (data.Result) {
+                                        //reload grid
+                                        updateTable('#urlrewrites-grid');
+
+                                        //clear input value
+                                        $("#@Html.IdFor(model => model.AddUrlRewrite.RequestUrl)").val('');
+                                        $("#@Html.IdFor(model => model.AddUrlRewrite.TargetUrl)").val('');
+                                        $("#@Html.IdFor(model => model.AddUrlRewrite.Comment)").val('');
+                                    } else {
+                                        //display errors if returned
+                                        display_nop_error(data);
+                                    }
+                                },
+                                complete: function (jqXHR, textStatus) {
+                                    $('#addUrlRewrite').attr('disabled', false);
+                                }
+                            });
+                        });
+                    });
+                    </script>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@*import URL rewrites form*@
+<div id="importcsv-window" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="importcsv-window-title">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="importcsv-window-title">@T("Admin.Common.ImportFromCsv")</h4>
+            </div>
+            <form asp-controller="RedirectManagerUrlRewrite" asp-action="ImportCsv" method="post" enctype="multipart/form-data">
+                <div class="form-horizontal">
+                    <div class="modal-body">
+                        <ul class="common-list">
+                            <li>
+                                <em>@T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.ImportTip")</em>
+                            </li>
+                        </ul>
+                        <div class="form-group row">
+                            <div class="col-md-2">
+                                <div class="label-wrapper">
+                                    <label class="control-label">
+                                        @T("Admin.Common.CsvFile")
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-10">
+                                <input type="file" id="importcsvfile" name="importcsvfile" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">
+                            @T("Admin.Common.ImportFromCsv")
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

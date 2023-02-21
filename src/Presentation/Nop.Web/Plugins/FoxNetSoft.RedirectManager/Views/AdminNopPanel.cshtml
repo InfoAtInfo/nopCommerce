@@ -1,0 +1,6 @@
+﻿@model FoxNetSoft.Plugin.Misc.RedirectManager.Models.TabContentSearchModel
+@{
+    const string hideRedirectManagerBlockName = "ProductPage.RedirectManager";
+    var hideRedirectManagerBlock = await genericAttributeService.GetAttributeAsync<bool>(await workContext.GetCurrentCustomerAsync(), hideRedirectManagerBlockName);
+}
+<nop-card asp-name="tab-foxnetsoft-redirectmanager" asp-icon="fa fa-download" asp-title="@T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.TabName")" asp-hide-block-attribute-name="@hideRedirectManagerBlockName" asp-hide="@hideRedirectManagerBlock" asp-advanced="true">@await Html.PartialAsync("~/Plugins/FoxNetSoft.RedirectManager/Views/AdminTabStripContent.cshtml", Model)</nop-card>

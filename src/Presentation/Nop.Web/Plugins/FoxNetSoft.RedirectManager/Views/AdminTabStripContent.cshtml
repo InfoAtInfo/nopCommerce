@@ -1,0 +1,52 @@
+﻿@model FoxNetSoft.Plugin.Misc.RedirectManager.Models.TabContentSearchModel
+@using FoxNetSoft.Plugin.Misc.RedirectManager.Models
+@using Microsoft.AspNetCore.Routing
+@{
+    Layout = "";
+}
+<div class="card-body">
+ @await Html.PartialAsync("Table", new DataTablesModel
+{
+    Name = "urlrewrites-grid",
+    UrlRead = new DataUrl("AdminTabStripContentList", "RedirectManagerUrlRewrite", new RouteValueDictionary { [nameof(Model.EntityGroup)] = Model.EntityGroup, [nameof(Model.EntityId)] = Model.EntityId }),
+    SearchButtonId = "search-urlrewrites",
+    Length = Model.PageSize,
+    LengthMenu = Model.AvailablePageSizes,
+    ColumnCollection = new List<ColumnProperty>
+            {
+            new ColumnProperty(nameof(UrlRewriteModel.Store))
+            {
+                Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.Store").Text,
+                Width = "100",
+                Visible = !Model.HideStoresList
+            },
+            new ColumnProperty(nameof(UrlRewriteModel.RedirectType))
+            {
+                Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RedirectType").Text,
+                Width = "200"
+            },
+            new ColumnProperty(nameof(UrlRewriteModel.RequestUrl))
+            {
+                Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.RequestUrl").Text
+            },
+            new ColumnProperty(nameof(UrlRewriteModel.TargetUrl))
+            {
+                Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.TargetUrl").Text
+            },
+            new ColumnProperty(nameof(UrlRewriteModel.PreserveQueryStrings))
+            {
+                Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.PreserveQueryStrings").Text,
+                Width = "70",
+                ClassName = NopColumnClassDefaults.CenterAll,
+                Render = new RenderBoolean()
+
+            },
+            new ColumnProperty(nameof(UrlRewriteModel.Comment))
+            {
+                Title = T("Admin.FoxNetSoft.Plugin.Misc.RedirectManager.UrlRewrite.Fields.Comment").Text
+            }
+    }
+})
+</div>
+ 
+

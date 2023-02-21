@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Misc",
+  "FriendlyName": "Redirect Manager",
+  "SystemName": "FoxNetSoft.RedirectManager",
+  "Version": "1.22",
+  "SupportedVersions": [ "4.40" ],
+  "Author": "FoxNetSoft",
+  "DisplayOrder": 1,
+  "FileName": "FoxNetSoft.Plugin.Misc.RedirectManager.dll",
+  "Description": "Redirect routes (301, etc.)."
+}
