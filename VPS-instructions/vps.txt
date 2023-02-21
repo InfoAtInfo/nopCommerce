@@ -24,26 +24,49 @@ Publish the app localy:
 
 4. Grant permission (from /var/www folder):
 cd ..
-sudo chgrp -R www-data domain (sudo chgrp -R www-data ena.rs)
-sudo chown -R www-data domain (sudo chown -R www-data ena.rs)
+sudo chgrp -R www-data ena
+sudo chown -R www-data ena
 
-5. Add 'default' file to /etc/nginx/sites-available
+5. Copy content of 'default-no-ssl' file to /etc/nginx/sites-available/default 
+*file name on the server should stay 'default' (not 'default-no-ssl')
 
-
-6. Execute (we have to create a symbolic link that connects the file in "/etc/nginx/sites-available" to the folder "/etc/nginx/sites-enabled"):
+6. (Optional: do this if file in sites-available is not named 'default')
+Execute (we have to create a symbolic link that connects the file in "/etc/nginx/sites-available" to the folder "/etc/nginx/sites-enabled"):
 *change mydomain.com to ena.rs
-sudo ln -s /etc/nginx/sites-available/mydomain.com /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/ena /etc/nginx/sites-enabled/
 
 7. Create service file:
 cd /etc/systemd/system/
 copy file ena.service
 
 8. Start the service:
-sudo systemctl start ena.rs.service
+sudo systemctl start ena.service
 
-sudo systemctl status ena.rs.service
-
-
+sudo systemctl status ena.service
 
 *restart nginx: sudo systemctl restart nginx
-**check logs:   sudo journalctl --since "1 minute ago" | grep "mydomain"
+**check logs:   sudo journalctl --since "1 minute ago"
+
+9. Install MS Sql Server
+https://www.how2shout.com/linux/how-to-install-microsoft-sql-server-on-ubuntu-20-04-lts/
+Select Developer edition when asked
+
+10. Restore database
+Upload the newest backup to the root location ("/") via FTP and run restore command within SSMS or elsewhere:
+RESTORE DATABASE NopCommerce FROM DISK ='/full_20230130-161623_e002674.bak' WITH MOVE 'e002674_dat' TO '/var/opt/mssql/data/NopCommerce.mdf', MOVE 'e002674_log' TO '/var/opt/mssql/data/NopCommerce.ldf'
+
+* replace filename ('full_20230130-161623_e002674.bak') and filenames ('e002674_dat' and 'e002674_log') if they are different
+** to see files of a backup, run 'RESTORE FILELISTONLY ...'
+
+11. Install SSL certificate and enable SSL
+
+sudo apt install certbot python3-certbot-nignx
+
+sudo certbot --nginx -d example.com -d www.example.com
+
+Change UseHttpXForwardedProto to 'true' in App_Data/appsettings.json
+
+Upload 'default' file to /etc/nginx/sites-available/default (this will replace the old conent)
+
+systemctl restart ena.service
+
