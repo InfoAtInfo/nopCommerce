@@ -774,6 +774,7 @@ namespace Nop.Web.Factories
             }
             //rental
             model.IsRental = product.IsRental;
+            model.IsScrapedProduct = product.IsScrapedProduct;
 
             //customer entered price
             model.CustomerEntersPrice = product.CustomerEntersPrice;
@@ -1347,7 +1348,8 @@ namespace Nop.Web.Factories
                 DisplayDiscontinuedMessage = !product.Published && _catalogSettings.DisplayDiscontinuedMessageForUnpublishedProducts,
                 AvailableEndDate = product.AvailableEndDateTimeUtc,
                 VisibleIndividually = product.VisibleIndividually,
-                AllowAddingOnlyExistingAttributeCombinations = product.AllowAddingOnlyExistingAttributeCombinations
+                AllowAddingOnlyExistingAttributeCombinations = product.AllowAddingOnlyExistingAttributeCombinations,
+                IsScrapedProduct = product.IsScrapedProduct
             };
 
             //automatically generate product description?

@@ -36,6 +36,11 @@ namespace Nop.Core.Domain.Catalog
         public string Name { get; set; }
 
         /// <summary>
+        /// Gets or sets the name changed
+        /// </summary>
+        public bool NameChanged { get; set; }
+
+        /// <summary>
         /// Gets or sets the short description
         /// </summary>
         public string ShortDescription { get; set; }
@@ -149,6 +154,11 @@ namespace Nop.Core.Domain.Catalog
         /// Gets or sets a value indicating whether the product requires that other products are added to the cart (Product X requires Product Y)
         /// </summary>
         public bool RequireOtherProducts { get; set; }
+
+        /// <summary>
+        /// Gets or sets is scraped product
+        /// </summary>
+        public bool IsScrapedProduct { get; set; }
 
         /// <summary>
         /// Gets or sets a required product identifiers (comma separated)
