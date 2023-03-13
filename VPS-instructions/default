@@ -5,7 +5,9 @@ server {
     #listen [::]:80;
     listen 443 ssl;
     listen [::]:443 ssl;
-    
+	ssl_certificate /etc/letsencrypt/live/ena.rs/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/ena.rs/privkey.pem;
+	
     include snippets/self-signed.conf;
     include snippets/ssl-params.conf;
 
