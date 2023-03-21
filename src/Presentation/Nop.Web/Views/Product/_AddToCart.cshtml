@@ -97,7 +97,7 @@
         }
         @if (Model.IsScrapedProduct == true)
         {
-            <p>Ovaj proizvod se ceka 10 do 15</p>
+            <p style="font-size: 20px;font-weight: 500;color: black;">Ovaj proizvod se ceka do 30 dana. <br>Kontaktirajte nas za više informacija.</p>
         }
         @await Component.InvokeAsync("Widget", new { widgetZone = PublicWidgetZones.ProductDetailsAddInfo, additionalData = Model })
     </div>
