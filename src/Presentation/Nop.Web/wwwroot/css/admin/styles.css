@@ -2612,3 +2612,8 @@ div.dataTables_wrapper div.dataTables_paginate {
     float: none;
   }
 }
+
+#products-grid img {
+  max-width: 75px !important;
+  max-height: 75px !important;
+}
