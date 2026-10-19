@@ -678,6 +678,12 @@ namespace Nop.Services.Messages
             //shipping
             var displayShipping = order.ShippingStatus != ShippingStatus.ShippingNotRequired;
 
+            //ena.rs: courier delivery has no fixed charge in the shop - it's billed per the courier's price list.
+            //When the stored shipping cost is 0, show that note in the e-mail instead of "0".
+            var shipByCourierPriceList = displayShipping
+                && order.OrderShippingInclTax == decimal.Zero
+                && order.OrderShippingExclTax == decimal.Zero;
+
             //payment method fee
             var displayPaymentMethodFee = order.PaymentMethodAdditionalFeeExclTax > decimal.Zero;
 
@@ -737,7 +743,11 @@ namespace Nop.Services.Messages
             //shipping
             if (displayShipping)
             {
-                sb.AppendLine($"<tr style=\"text-align:right;\"><td>&nbsp;</td><td colspan=\"2\" style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{await _localizationService.GetResourceAsync("Messages.Order.Shipping", languageId)}</strong></td> <td style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{cusShipTotal}</strong></td></tr>");
+                //ena.rs: localizable note for courier price-list delivery (falls back to Serbian if the resource is missing in the DB)
+                var shipValue = shipByCourierPriceList
+                    ? await _localizationService.GetResourceAsync("Messages.Order.Shipping.CourierPriceList", languageId, false, "Po cenovniku kurirske službe")
+                    : cusShipTotal;
+                sb.AppendLine($"<tr style=\"text-align:right;\"><td>&nbsp;</td><td colspan=\"2\" style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{await _localizationService.GetResourceAsync("Messages.Order.Shipping", languageId)}</strong></td> <td style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{shipValue}</strong></td></tr>");
             }
 
             //payment method fee
@@ -791,7 +801,14 @@ namespace Nop.Services.Messages
             }
 
             //total
-            sb.AppendLine($"<tr style=\"text-align:right;\"><td>&nbsp;</td><td colspan=\"2\" style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{await _localizationService.GetResourceAsync("Messages.Order.OrderTotal", languageId)}</strong></td> <td style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{cusTotal}</strong></td></tr>");
+            var totalValue = cusTotal;
+            if (shipByCourierPriceList)
+            {
+                //ena.rs: append the localizable delivery word when the courier price list applies
+                var deliveryWord = await _localizationService.GetResourceAsync("Messages.Order.ShippingSuffix", languageId, false, "dostava");
+                totalValue = $"{cusTotal} + {deliveryWord}";
+            }
+            sb.AppendLine($"<tr style=\"text-align:right;\"><td>&nbsp;</td><td colspan=\"2\" style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{await _localizationService.GetResourceAsync("Messages.Order.OrderTotal", languageId)}</strong></td> <td style=\"background-color: {_templatesSettings.Color3};padding:0.6em 0.4 em;\"><strong>{totalValue}</strong></td></tr>");
         }
 
         /// <summary>
